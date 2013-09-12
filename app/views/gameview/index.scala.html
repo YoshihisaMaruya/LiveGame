@@ -71,7 +71,7 @@
 	            var bgm = game.assets['@routes.Assets.at("getbanana/sound/TWEEPOP_777.wav")'];
 	            bgm.play();
 	            bgm.volume = 0.5;
-	            bgm._element.loop = true;
+	            bgm.src.loop = true;
 	            
 	            game.keybind('Q'.charCodeAt(0), 'bgmstop');
 	            
