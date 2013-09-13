@@ -734,7 +734,33 @@ div#enchant-stage {
                                   });
      player.group.addChild(item_sprite);
    }
- }
+ };
+ 
+ // 悪いアイテム用
+ function dropItem_ojyama2(player, item) {
+   console.log("player.pos = " + player.pos);
+   var no_appearence_pos = rand(304)+player.pos;
+   var drop_speed = 1;
+   for(var i=player.pos; i<304+player.pos; i+=16) {
+     if(i>no_appearence_pos-25 && i<no_appearence_pos+25){
+       console.log("in no_appearence_pos  " + no_appearence_pos);
+       continue;
+       }
+     var item_sprite = new Icon0(item.frame, i, 0, 1);
+       item_sprite.drop_speed = drop_speed; // 落下速度 0-5
+     
+     item_sprite.addEventListener('enterframe', function(e) {
+                                  if(this.intersect(player.bear)){       // bearとの当たり判定
+                                  player.group.removeChild(this); // 画面から消去
+                                  itemMethod(player, item);
+                                  }else{
+                                  this.y += this.drop_speed+1;                // y座標を増やす (落下)
+                                  }
+                                  });
+     player.group.addChild(item_sprite);
+   }
+ };
+ 
  function dropItem2(player, item) {
      var item_sprite = new Icon0(item.frame, rand(304)+ player.pos, 0, 1);
      item_sprite.drop_speed = rand(5); // 落下速度 0-5
@@ -817,11 +843,24 @@ div#enchant-stage {
              break;
          }
          case DROP_ITEM.PORTION:
+        	 if(player==player1)
+        		 dropItem_ojyama2(player2, DROP_ITEM.PORTION.BAD);
+        	 else dropItem_ojyama2(player1, DROP_ITEM.PORTION.BAD);
+        	 break;
          case DROP_ITEM.BOMB:
+        	 if(player==player1)
+        		 dropItem_ojyama2(player2, DROP_ITEM.BOMB.BAD);
+        	 else dropItem_ojyama2(player1, DROP_ITEM.BOMB.BAD);
+        	 break;
          case DROP_ITEM.PIG:
+        	 if(player==player1)
+        		 dropItem_ojyama2(player2, DROP_ITEM.PIG.BAD);
+        	 else dropItem_ojyama2(player1, DROP_ITEM.PIG.BAD);
+        	 break;
          case DROP_ITEM.STAR: {
-             if(isChrome) playSound('@routes.Assets.at("getbanana/sound/se6.wav")');
-             addItem(player, item);
+           /*   if(isChrome) playSound('@routes.Assets.at("getbanana/sound/se6.wav")');
+              addItem(player, item);*/
+              fever();
              break;
          }
          // 悪い効果
