@@ -24,9 +24,9 @@ div#enchant-stage {
  };
 
  var SPEED = {
-     FAST : 10,
-     NORMAL : 5,
-     SLOW : 2
+     FAST : 15,
+     NORMAL : 10,
+     SLOW : 3
  };
 
  var HAVE_ITEM_MAX = 3; // 持てるアイテムの最大値　変更時には要レイアウト
@@ -715,7 +715,7 @@ div#enchant-stage {
    var item = getDropItem_BAD();
    console.log("player.pos = " + player.pos);
    var no_appearence_pos = rand(304)+player.pos;
-   var drop_speed = 2;
+   var drop_speed = 1;
    for(var i=player.pos; i<304+player.pos; i+=16) {
      if(i>no_appearence_pos-25 && i<no_appearence_pos+25){
        console.log("in no_appearence_pos  " + no_appearence_pos);
