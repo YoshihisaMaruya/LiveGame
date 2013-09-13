@@ -187,10 +187,10 @@ div#enchant-stage {
 
                                    // 次シーンへの推移　プレイヤー1の下ボタン
                                    this.addEventListener('downbuttondown', function() {
-                                	  //  if(current_game_status == game_status.active) {
+                                	    if(current_game_status == game_status.active) {
                                         	current_game_status = game_status.start;
                                         	gameStartCountdown();
-                                      //  }
+                                        }
                                         });
                                    }
                                    });
