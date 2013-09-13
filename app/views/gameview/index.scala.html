@@ -77,7 +77,7 @@ div#enchant-stage {
              var bgm = game.assets['@routes.Assets.at("getbanana/sound/TWEEPOP_777.wav")'];
              bgm.play();
              bgm.volume = 0.5;
-             bgm._element.loop = true;
+             bgm.src.loop = true;
              
              game.keybind('Q'.charCodeAt(0), 'bgmstop');
              
@@ -554,6 +554,7 @@ div#enchant-stage {
                                 game.keybind('Z'.charCodeAt(0), 'a');
                                 game.keybind('X'.charCodeAt(0), 'b');
                             } */
+                            if(isChrome) playSound('@routes.Assets.at("getbanana/sound/se6.wav")');
                             player.flippedAt = -1;
                             }
                             
