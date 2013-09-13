@@ -717,7 +717,7 @@ div#enchant-stage {
    var no_appearence_pos = rand(304)+player.pos;
    var drop_speed = 1;
    for(var i=player.pos; i<304+player.pos; i+=16) {
-     if(i>no_appearence_pos-25 && i<no_appearence_pos+25){
+     if(i>no_appearence_pos-30 && i<no_appearence_pos+30){
        console.log("in no_appearence_pos  " + no_appearence_pos);
        continue;
        }
@@ -881,7 +881,7 @@ div#enchant-stage {
          }
          case DROP_ITEM.BOMB.BAD: {
              if(isChrome) playSound('@routes.Assets.at("getbanana/sound/shot5.wav")');
-             player.score /= 2;
+             player.score -= 100;
              break;
          }
          case DROP_ITEM.PIG.BAD: {
