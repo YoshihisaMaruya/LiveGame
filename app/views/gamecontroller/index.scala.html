@@ -65,10 +65,15 @@
 	<body>
 		<div id="container">
 			<div id="direction_button">
-				<img id="db" src="http://placehold.it/200x200">
+				@if(role == "left") {
+ 					 <img id="db" src='@routes.Assets.at("images/controller/left.png")'>
+				} else {
+  					 <img id="db" src='@routes.Assets.at("images/controller/right.png")'>
+				}
+				
 			</div>
 			<div id="item_button">
-				<img id="ib" src="http://placehold.it/200x200">
+				<img id="ib" src='@routes.Assets.at("images/controller/item.png")'>
 			</div>
 			<div class="clear"></div>
 		</div>
