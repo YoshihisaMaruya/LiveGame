@@ -187,10 +187,10 @@ div#enchant-stage {
 
                                    // 次シーンへの推移　プレイヤー1の下ボタン
                                    this.addEventListener('downbuttondown', function() {
-                                	    if(current_game_status == game_status.active) {
+                                	  //  if(current_game_status == game_status.active) {
                                         	current_game_status = game_status.start;
                                         	gameStartCountdown();
-                                        }
+                                      //  }
                                         });
                                    }
                                    });
@@ -462,19 +462,28 @@ div#enchant-stage {
                                }
                                
                              //add
-                             if(player.flippedAt != -1) {
-                            	 left_iputed = !left_iputed;
-                            	right_inputed = !right_inputed;
-                             }
 	                              if(left_iputed) {
-	                              this.x -= player.speed;
-	                              if(this.scaleX > 0) this.scaleX *= -1;
-	                              left_iputed = false;
-	                              }
+                            	 	 if(player.flippedAt != -1) {
+    	                              this.x += player.speed;
+    	                              if(this.scaleX < 0) this.scaleX *= -1;
+    	                              right_inputed = false;
+                            	  	} else {
+      	                              this.x -= player.speed;
+      	                              if(this.scaleX > 0) this.scaleX *= -1;
+      	                              left_iputed = false;
+                            	  	}
+                            	  }
+	                              
 	                              if(right_inputed) {
-	                              this.x += player.speed;
-	                              if(this.scaleX < 0) this.scaleX *= -1;
-	                              right_inputed = false;
+	                             	 if(player.flippedAt != -1) {
+	   	                              this.x -= player.speed;
+		                              if(this.scaleX > 0) this.scaleX *= -1;
+		                              left_iputed = false;
+	                             	 } else {
+	   	                              this.x += player.speed;
+		                              if(this.scaleX < 0) this.scaleX *= -1;
+		                              right_inputed = false;
+	                             	 }
 	                              }
 
                                
@@ -503,20 +512,29 @@ div#enchant-stage {
                                if(this.scaleX < 0) this.scaleX *= -1;
                                }
                                
-                               if(player.flippedAt != -1) {
-                            	   left_iputed = !left_iputed;
-                            	   right_inputed = !right_inputed;
-                                }
                                if(left_iputed) {
-		                              this.x -= player.speed;
+                          	 	 if(player.flippedAt != -1) {
+  	                              this.x += player.speed;
+  	                              if(this.scaleX < 0) this.scaleX *= -1;
+  	                              right_inputed = false;
+                          	  	} else {
+    	                              this.x -= player.speed;
+    	                              if(this.scaleX > 0) this.scaleX *= -1;
+    	                              left_iputed = false;
+                          	  	}
+                          	  }
+	                              
+	                              if(right_inputed) {
+	                             	 if(player.flippedAt != -1) {
+	   	                              this.x -= player.speed;
 		                              if(this.scaleX > 0) this.scaleX *= -1;
 		                              left_iputed = false;
-		                          }
-		                          if(right_inputed) {
-		                              this.x += player.speed;
+	                             	 } else {
+	   	                              this.x += player.speed;
 		                              if(this.scaleX < 0) this.scaleX *= -1;
 		                              right_inputed = false;
-		                          }
+	                             	 }
+	                              }
                                
                                // 端処理
                                if(this.x < pos) this.x = pos;
@@ -555,7 +573,7 @@ div#enchant-stage {
                                 game.keybind('X'.charCodeAt(0), 'b');
                             } */
                             if(isChrome) playSound('@routes.Assets.at("getbanana/sound/se6.wav")');
-                            player.flipped_label.visible = false;
+                            player.flipped_label.setVisible(false);
                             player.flippedAt = -1;
                             }
                             
@@ -580,7 +598,7 @@ div#enchant-stage {
 	 this.flipped_label = new FontGroup("Flipped!!");
 	 this.flipped_label.x = pos+200;
 	 this.flipped_label.y = 10;
-	 this.flipped_label.visible = false;
+	 this.flipped_label.setVisible(false);
 	 group.addChild(this.flipped_label);
      
      this.scorelabel_score = new ScoreGroup(5);
@@ -662,8 +680,15 @@ div#enchant-stage {
          letter.frame = str[i].charCodeAt(0)-32;
          this.addChild(letter);
      }
-                              }});
-
+                              },
+  setVisible:
+  function(visibility){
+	for(var i=0; i<this.childNodes.length; i++){
+		this.childNodes[i].visible = visibility;
+	}	  
+  }
+                              });
+ 
  // アイテム画像と画像文字列作成
  // HOW TO USE: new FontGroupWithSprites("%S...10 POINTS", frameID);
  var FontGroupWithSprites = Class.create(Group, {
@@ -894,13 +919,13 @@ div#enchant-stage {
              } else {
                  console.log("itemMethod: error");
              } */
-             player.flipped_label.visible = true;
+             player.flipped_label.setVisible(true);
              player.flippedAt = game.frame;
              break;
          }
          case DROP_ITEM.BOMB.BAD: {
              if(isChrome) playSound('@routes.Assets.at("getbanana/sound/shot5.wav")');
-             if(player.score <= 0) player.score = 0;
+             if(player.score <= 0) { player.score = 0; return; }
              player.score -= 100;
              break;
          }
