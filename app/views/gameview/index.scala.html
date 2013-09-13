@@ -462,6 +462,10 @@ div#enchant-stage {
                                }
                                
                              //add
+                             if(player.flippedAt != -1) {
+                            	left_input = !left_input;
+                             	right_input = !right_input;
+                             }
 	                              if(left_iputed) {
 	                              this.x -= player.speed;
 	                              if(this.scaleX > 0) this.scaleX *= -1;
@@ -499,6 +503,10 @@ div#enchant-stage {
                                if(this.scaleX < 0) this.scaleX *= -1;
                                }
                                
+                               if(player.flippedAt != -1) {
+                               	left_input = !left_input;
+                                	right_input = !right_input;
+                                }
                                if(left_iputed) {
 		                              this.x -= player.speed;
 		                              if(this.scaleX > 0) this.scaleX *= -1;
@@ -538,13 +546,14 @@ div#enchant-stage {
                             // キー反転の時の処理（ポーション）
                             if(player.flippedAt != -1 &&
                                (game.frame-player.flippedAt) > game.fps * 3) {
-                            if(player.pos == 0) {
+                            	
+                            /* if(player.pos == 0) {
                                 game.keybind(39, 'right');
                                 game.keybind(37, 'left');
                             } else {
                                 game.keybind('Z'.charCodeAt(0), 'a');
                                 game.keybind('X'.charCodeAt(0), 'b');
-                            }
+                            } */
                             player.flippedAt = -1;
                             }
                             
@@ -866,7 +875,7 @@ div#enchant-stage {
          // 悪い効果
          case DROP_ITEM.PORTION.BAD: {
              if(isChrome) playSound('@routes.Assets.at("getbanana/sound/se3.wav")');
-             if(player == player1) {
+             /* if(player == player1) {
                  game.keybind(39, 'left');
                  game.keybind(37, 'right');
                  player1.flippedAt = game.frame;
@@ -876,11 +885,13 @@ div#enchant-stage {
                  player2.flippedAt = game.frame;
              } else {
                  console.log("itemMethod: error");
-             }
+             } */
+             player.flippedAt = game.frame;
              break;
          }
          case DROP_ITEM.BOMB.BAD: {
              if(isChrome) playSound('@routes.Assets.at("getbanana/sound/shot5.wav")');
+             if(player.score <= 0) player.score = 0;
              player.score -= 100;
              break;
          }
