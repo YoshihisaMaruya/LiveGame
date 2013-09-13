@@ -555,6 +555,7 @@ div#enchant-stage {
                                 game.keybind('X'.charCodeAt(0), 'b');
                             } */
                             if(isChrome) playSound('@routes.Assets.at("getbanana/sound/se6.wav")');
+                            player.flipped_label.visible = false;
                             player.flippedAt = -1;
                             }
                             
@@ -575,6 +576,11 @@ div#enchant-stage {
      scorelabel.x = pos;
      scorelabel.y = scorelabel.height;
      group.addChild(scorelabel);
+     
+	 this.flipped_label = new FontGroup("Flipped!!");
+	 flipped_label.x = pos+200;
+	 flipped_label.y = 10;
+	 flipped_label.visible = false;
      
      this.scorelabel_score = new ScoreGroup(5);
      this.scorelabel_score.x = pos;
@@ -887,6 +893,7 @@ div#enchant-stage {
              } else {
                  console.log("itemMethod: error");
              } */
+             player.flipped_label.visible = true;
              player.flippedAt = game.frame;
              break;
          }
