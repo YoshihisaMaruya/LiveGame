@@ -18,30 +18,10 @@
     	@head
     </head>
     <body>
-      <div class="topbar">
-            <div class="fill">
-                <div class="container">
-                    <a class="brand" href="@routes.GameView.login()">LiveGame</a>
-                    @connected.map { roomname =>
-                        <p class="pull-right">
-                            Logged in as @roomname <a href="@routes.GameView.dologout">Disconnect</a>
-                        </p>
-                    }.getOrElse {
-                       
-                    }
-                    
-                </div>
-            </div>
-        </div>
         <div class="container">
             <div class="content">
                 @content
             </div>
-            <footer>
-                <p>
-                    <h1>(^ v ^)</h1>
-                </p>
-            </footer>
         </div>
     </body>
 </html>
